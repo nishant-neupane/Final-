@@ -1,0 +1,40 @@
+
+
+/* OurRooms.css */
+
+.container-rooms {
+  width: 45%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+  container-rooms-book{
+    width: 45%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+  
+  .rooms__hero {
+    font-size: 2.5rem;
+    color: #333;
+  }
+  
+  .row {
+    margin-top: 20px;
+  }
+  
+  .col-md-4 {
+    padding: 0 15px;
+  }
+  
+  .rooms__image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+    
+  .rooms__image {
+    margin-top: 15px;
+  }

@@ -1,0 +1,102 @@
+
+.hotel-booking-form {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  color: #282834;
+}
+
+.hotel-booking-form h2 {
+  text-align: center;
+}
+
+.hotel-booking-form label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.hotel-booking-form input[type="text"],
+.hotel-booking-form input[type="email"],
+.hotel-booking-form input[type="tel"],
+.hotel-booking-form input[type="number"],
+.hotel-booking-form input[type="date"],
+.hotel-booking-form textarea,
+.hotel-booking-form select,
+.form input[type="date"],
+.form input[type="number"],
+.form select,
+.form input[type="submit"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.hotel-booking-form button,
+.form input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #7fc142;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.hotel-booking-form button:hover,
+.form input[type="submit"]:hover {
+  background-color: #7fc142;
+}
+
+.room-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.room {
+  width: calc(33.33% - 20px);
+  margin-right: 20px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.room img {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #ccc;
+}
+
+.room-info {
+  padding: 10px;
+}
+
+.room-info h4 {
+  margin-bottom: 5px;
+}
+
+.room-info p {
+  margin-bottom: 5px;
+}
+
+.room-info p:last-child {
+  margin-bottom: 0;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px; 
+}

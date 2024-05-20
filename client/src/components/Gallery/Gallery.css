@@ -1,0 +1,21 @@
+.gallery-container {
+  max-height: 500px;
+  overflow-x: auto;
+}
+
+.gallery__hero {
+  font-family: Poppins Black;
+  font-size: 50px;
+  color: black;
+}
+
+
+
+.gallery__image:hover {
+  opacity: 0.6;
+}
+.gallery-row {
+  display: flex;
+}
+
+
