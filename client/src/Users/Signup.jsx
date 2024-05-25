@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
@@ -13,9 +15,18 @@ function Signup() {
   const [otp, setOtp] = useState("");
   const [errors, setErrors] = useState({});
   const [signupError, setSignupError] = useState("");
-  const [signupSuccess, setSignupSuccess] = useState(false);
   const [otpSent, setOtpSent] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
 
   const validateForm = () => {
     const errors = {};
@@ -28,6 +39,9 @@ function Signup() {
     if (!password.trim()) {
       errors.password = "Please enter your password";
     }
+    if (!confirmPassword.trim()) {
+      errors.password = "Please enter your Conform password";
+    }
     if (password !== confirmPassword) {
       errors.confirmPassword = "Passwords do not match";
     }
@@ -39,11 +53,29 @@ function Signup() {
     const formErrors = validateForm();
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
+      setTimeout(() => {
+        setErrors({});
+      }, 3000);
       return;
     }
-    requestOTP();
+    checkEmailExists();
   };
 
+  const checkEmailExists = () => {
+    axios
+      .post("http://localhost:3001/checkemail", { email })
+      .then((response) => {
+        const { exists } = response.data;
+        if (exists) {
+          toast.error("Email already exists");
+        } else {
+          requestOTP();
+        }
+      })
+      .catch((error) => {
+        toast.error("An error occurred while checking email existence");
+      });
+  };
   const requestOTP = () => {
     axios
       .post("http://localhost:3001/sendotp", { email })
@@ -52,19 +84,14 @@ function Signup() {
         setSignupError("");
       })
       .catch((error) => {
-        if (
-          error.response &&
-          error.response.status === 400 &&
-          error.response.data.error === "Email already exists"
-        ) {
-          toast.error("Email already exists");
-        } else {
-          let errorMessage = "";
-          if (error.response && error.response.data.error) {
-            errorMessage = error.response.data.error;
-          } else {
-            errorMessage = "An error occurred while sending OTP";
+        let errorMessage = "";
+        if (error.response && error.response.data.error) {
+          errorMessage = error.response.data.error;
+          if (errorMessage !== "Email already exists") {
+            setSignupError(errorMessage);
           }
+        } else {
+          errorMessage = "An error occurred while sending OTP";
           setSignupError(errorMessage);
         }
       });
@@ -75,7 +102,6 @@ function Signup() {
     axios
       .post("http://localhost:3001/verifyotp", { email, otp })
       .then((response) => {
-        setSignupSuccess(true);
         createUser();
       })
       .catch((error) => {
@@ -154,23 +180,45 @@ function Signup() {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <div className="mb-3">
+            <div className="mb-3 position-relative">
               <label htmlFor="password">
                 <strong>Password</strong>
               </label>
               {errors.password && (
                 <div className="alert alert-danger mt-2">{errors.password}</div>
               )}
-              <input
-                type="password"
-                placeholder="Enter password"
-                name="password"
-                className="form-control rounded-0"
-                style={{ width: "100%" }}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <div className="input-group">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter password"
+                  name="password"
+                  className="form-control rounded-0"
+                  style={{ paddingRight: "3rem" }} 
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <div
+                  className="input-group-append"
+                  style={{
+                    position: "absolute",
+                    right: 0,
+                    top: 0,
+                    bottom: 0,
+                    zIndex: 1,
+                  }}
+                >
+                  <button
+                    type="button"
+                    className="btn btn-outline-secondary"
+                    onClick={togglePasswordVisibility}
+                    style={{ height: "100%" }}
+                  >
+                    <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                  </button>
+                </div>
+              </div>
             </div>
-            <div className="mb-3">
+
+            <div className="mb-3 position-relative">
               <label htmlFor="confirmPassword">
                 <strong>Confirm Password</strong>
               </label>
@@ -179,15 +227,39 @@ function Signup() {
                   {errors.confirmPassword}
                 </div>
               )}
-              <input
-                type="password"
-                placeholder="Confirm password"
-                name="confirmPassword"
-                className="form-control rounded-0"
-                style={{ width: "100%" }}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
+              <div className="input-group">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  placeholder="Confirm password"
+                  name="confirmPassword"
+                  className="form-control rounded-0"
+                  style={{ paddingRight: "3rem" }} 
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+                <div
+                  className="input-group-append"
+                  style={{
+                    position: "absolute",
+                    right: 0,
+                    top: 0,
+                    bottom: 0,
+                    zIndex: 1,
+                  }}
+                >
+                  <button
+                    type="button"
+                    className="btn btn-outline-secondary"
+                    onClick={toggleConfirmPasswordVisibility}
+                    style={{ height: "100%" }}
+                  >
+                    <FontAwesomeIcon
+                      icon={showConfirmPassword ? faEyeSlash : faEye}
+                    />
+                  </button>
+                </div>
+              </div>
             </div>
+
             <button
               type="submit"
               className="btn btn-submit w-100 bg-primary rounded-pill btn-lg"
@@ -242,11 +314,6 @@ function Signup() {
             )}
           </form>
         )}
-        {signupSuccess && (
-          <div className="alert alert-success mt-2">
-            Signup successful. Redirecting to login...
-          </div>
-        )}
       </div>
       <img
         src="src/assets/vector.jpg"
@@ -259,4 +326,3 @@ function Signup() {
 }
 
 export default Signup;
-  

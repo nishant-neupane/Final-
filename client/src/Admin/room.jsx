@@ -95,16 +95,13 @@ function Room() {
 
   const handleDeleteRoom = async (id) => {
     try {
-     
-        await axios.delete(`http://localhost:3001/rooms/${id}`);
-        fetchRooms();
-      
+      await axios.delete(`http://localhost:3001/rooms/${id}`);
+      fetchRooms();
     } catch (error) {
       setErrorMessage("Error deleting room: " + error.response.data.error);
       console.error("Error deleting room:", error);
     }
   };
-  
 
   return (
     <div className="adminhome-container">
@@ -120,7 +117,9 @@ function Room() {
       <div className="main-content">
         <main className="adminhome-main-container">
           <div>
-            <h1 className="adminhome-main-title">Room Admin Panel</h1>
+            <div className="adminhome-main-title">
+              <h1>Room Admin Panel</h1>
+            </div>
             <div>
               <label>Room Number:</label>
               <input
@@ -168,38 +167,38 @@ function Room() {
 
             <h2>Room List</h2>
             <div className="table-container">
-            <table>
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Room Number</th>
-                  <th>Type</th>
-                  <th>Description</th>
-                  <th>Price</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {rooms.map((room) => (
-                  <tr key={room.id}>
-                    <td>{room.id}</td>
-                    <td>{room.roomNumber}</td>
-                    <td>{room.type}</td>
-                    <td>{room.description}</td>
-                    <td>RS {room.price} </td>
-                    <td>
-                      <button onClick={() => handleEditRoom(room.id)}>
-                        {" "}
-                        Edit
-                      </button>
-                      <button onClick={() => handleDeleteRoom(room.id)}>
-                        Delete
-                      </button>
-                    </td>
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Room Number</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {rooms.map((room) => (
+                    <tr key={room.id}>
+                      <td>{room.id}</td>
+                      <td>{room.roomNumber}</td>
+                      <td>{room.type}</td>
+                      <td>{room.description}</td>
+                      <td>RS {room.price} </td>
+                      <td>
+                        <button onClick={() => handleEditRoom(room.id)}>
+                          {" "}
+                          Edit
+                        </button>
+                        <button onClick={() => handleDeleteRoom(room.id)}>
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         </main>

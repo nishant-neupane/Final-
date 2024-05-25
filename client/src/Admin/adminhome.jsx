@@ -21,24 +21,28 @@ function Adminhome() {
 
   const fetchData = async () => {
     try {
-      const [roomsResponse, employeesResponse, assetsResponse] = await Promise.all([
-        axios.get("http://localhost:3001/rooms"),
-        axios.get("http://localhost:3001/employees"),
-        axios.get("http://localhost:3001/assets"),
-      ]);
+      const [roomsResponse, employeesResponse, assetsResponse] =
+        await Promise.all([
+          axios.get("http://localhost:3001/rooms"),
+          axios.get("http://localhost:3001/employees"),
+          axios.get("http://localhost:3001/assets"),
+        ]);
 
       const rooms = roomsResponse.data;
-      if (!Array.isArray(rooms)) throw new Error("Invalid data format for rooms");
+      if (!Array.isArray(rooms))
+        throw new Error("Invalid data format for rooms");
       setTotalRooms(rooms.length);
-      setAvailableRooms(rooms.filter(room => room.available).length);
-      setTotalRoomsUsed(rooms.filter(room => room.isOccupied).length);
+      setAvailableRooms(rooms.filter((room) => room.available).length);
+      setTotalRoomsUsed(rooms.filter((room) => room.isOccupied).length);
 
       const employees = employeesResponse.data;
-      if (!Array.isArray(employees)) throw new Error("Invalid data format for employees");
+      if (!Array.isArray(employees))
+        throw new Error("Invalid data format for employees");
       setTotalEmployees(employees.length);
 
       const assets = assetsResponse.data;
-      if (!Array.isArray(assets)) throw new Error("Invalid data format for assets");
+      if (!Array.isArray(assets))
+        throw new Error("Invalid data format for assets");
       setTotalAssets(assets.length);
 
       setLoading(false);
@@ -54,7 +58,10 @@ function Adminhome() {
         <title>Dashboard</title>
       </Helmet>
       <div className="adminhome-header">
-        <button className="hamburger" onClick={() => setOpenSidebar(!openSidebar)}>
+        <button
+          className="hamburger"
+          onClick={() => setOpenSidebar(!openSidebar)}
+        >
           <FaBars />
         </button>
       </div>
@@ -62,9 +69,9 @@ function Adminhome() {
         <Sidebar openSidebarToggle={openSidebar} />
       </div>
       <div className="adminhome-main-content">
-        <main className="adminhome-main-container-dashboard">
+        <main className="adminhome-main-container">
           <div className="adminhome-main-title">
-            <h3>DASHBOARD</h3>
+            <h1>DASHBOARD</h1>
           </div>
           {loading ? (
             <div>Loading...</div>

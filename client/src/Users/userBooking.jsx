@@ -26,7 +26,6 @@ function userBooking() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Perform validation
     if (!roomType || !checkInDate || !checkOutDate || !numberOfGuests) {
       setError("Please fill in all the fields");
       return;

@@ -59,9 +59,8 @@ const Header = () => {
     if (confirmed) {
       localStorage.removeItem("user");
       setIsLoggedIn(false);
-      navigate("/home");
+      navigate("/login");
       toast.success("Logout Succesfully!");
-      // navigate("");
     }
   };
 

@@ -14,6 +14,7 @@ const InventoryItem = require("./models/inventory");
 const Room = require("./models/rooms");
 const WorkerModel = require("./models/worker");
 
+
 const bodyParser = require("body-parser");
 require("dotenv").config();
 const { sendMail } = require("./Component/Nodemailaer");
@@ -371,6 +372,8 @@ app.post("/bookings", async (req, res) => {
     adults,
     children,
     roomNumber,
+    totalAmount,
+    phoneNumber,
   } = req.body;
 
   try {
@@ -393,7 +396,9 @@ app.post("/bookings", async (req, res) => {
       checkOutDate,
       adults,
       children,
-      roomNumber, // Add roomNumber here
+      roomNumber,
+      totalAmount,
+      phoneNumber,
     });
     res.status(201).json(newBooking);
   } catch (error) {
@@ -662,6 +667,25 @@ app.post("/verifyotp", (req, res) => {
     res.redirect("http://localhost:5173/home");
   } else {
     res.status(400).json({ error: "Invalid OTP" });
+  }
+});
+
+app.post("/checkemail", async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const user = await employeeModel.findOne({ email });
+
+    if (user) {
+      res.json({ exists: true });
+    } else {
+      res.json({ exists: false });
+    }
+  } catch (error) {
+    console.error("Error checking email existence:", error);
+    res
+      .status(500)
+      .json({ error: "An error occurred while checking email existence" });
   }
 });
 
@@ -1110,13 +1134,22 @@ app.get("/payment/callback", async (req, res) => {
         { paymentToken: true },
         { new: true }
       );
-
+      console.log(booking);
       if (booking) {
         await Room.findByIdAndUpdate(
           roomId,
           { available: false, isOccupied: true },
           { new: true }
         );
+        await axios.post("http://localhost:3001/send-booking-email", {
+          bill: booking.id,
+          fullName: booking.customerName,
+          email: booking.customerEmail,
+          phone: booking.phoneNumber,
+          checkInDate: booking.checkInDate,
+          checkOutDate: booking.checkOutDate,
+          totalAmount: booking.totalAmount,
+        });
         res.send(
           `<script>alert("Payment successful and receipt sent to your email");
           window.location.href = 'http://localhost:5173';</script>`
@@ -1128,11 +1161,10 @@ app.get("/payment/callback", async (req, res) => {
         );
       }
     } else {
-      res
-        .status(400)
-        .send(
-          `<script>alert("Payment failed or in pending state. Booking not made."); setTimeout(function() { window.location.href = 'http://localhost:5173'; }, 2000);</script>`
-        );
+      res.status(400).send(
+        `<script>alert("Payment failed or in pending state. Booking not made.");
+            window.location.href = 'http://localhost:5173';</script>`
+      );
     }
   } catch (error) {
     console.error("Error occurred while processing payment callback:", error);
@@ -1141,6 +1173,7 @@ app.get("/payment/callback", async (req, res) => {
       .send("Internal server error occurred while processing payment.");
   }
 });
+
 const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);

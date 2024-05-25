@@ -101,7 +101,11 @@ function Employee() {
       <div className="main-content">
         <main className="adminhome-main-container">
           <div>
-            <h2 className="adminhome-main-title"> Employee Admin Panel</h2>
+          <div className="adminhome-main-title">
+            <h1 >Employee Admin Panel</h1>
+            </div>
+
+
             <div>
               <label htmlFor="name">Name:</label>
               <input

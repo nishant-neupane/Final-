@@ -264,86 +264,104 @@ function Booking() {
       </div>
       <div className="main-content">
         <main className="adminhome-main-container">
-          <div>
-            <h1 className="adminhome-main-title">Booking Admin Panel</h1>
+          <div className="over">
+            <div className="adminhome-main-title">
+            <h1 >Booking Admin Panel</h1>
+            </div>
+           
             <div>
-              <label>Customer Name:</label>
-              <input
-                type="text"
-                name="customerName"
-                value={formData.customerName}
-                onChange={handleInputChange}
-              />
+              <div className="form-group">
+                <label>Customer Name:</label>
+                <input
+                  type="text"
+                  name="customerName"
+                  value={formData.customerName}
+                  onChange={handleInputChange}
+                />
+              </div>
             </div>
             <div>
-              <label>Customer Email:</label>
-              <input
-                type="email"
-                name="customerEmail"
-                value={formData.customerEmail}
-                onChange={handleInputChange}
-              />
+              <div className="form-group">
+                <label>Customer Email:</label>
+                <input
+                  type="email"
+                  name="customerEmail"
+                  value={formData.customerEmail}
+                  onChange={handleInputChange}
+                />
+              </div>
             </div>
             <div>
-              <label>Room Number:</label>
-              <input
-                type="text"
-                name="roomNumber"
-                value={formData.roomNumber}
-                onChange={handleInputChange}
-              />
+              <div className="form-group">
+                <label>Room Number:</label>
+                <input
+                  type="text"
+                  name="roomNumber"
+                  value={formData.roomNumber}
+                  onChange={handleInputChange}
+                />
+              </div>
             </div>
             <div>
-              <label>Room Type:</label>
-              <select
-                name="roomType"
-                value={formData.roomType}
-                onChange={handleInputChange}
-              >
-                <option value="Single">Single</option>
-                <option value="Double">Double</option>
-                <option value="Deluxe">Deluxe</option>
-                <option value="Single Double Deluxe">
-                  Single Double Deluxe
-                </option>
-              </select>
-            </div>
-
-            <div>
-              <label>Check-In Date:</label>
-              <input
-                type="date"
-                name="checkInDate"
-                value={formData.checkInDate}
-                onChange={handleInputChange}
-              />
+              <div className="form-group">
+                <label>Room Type:</label>
+                <select
+                  name="roomType"
+                  value={formData.roomType}
+                  onChange={handleInputChange}
+                >
+                  <option value="Single">Single</option>
+                  <option value="Double">Double</option>
+                  <option value="Deluxe">Deluxe</option>
+                  <option value="Single Double Deluxe">
+                    Single Double Deluxe
+                  </option>
+                </select>
+              </div>
             </div>
             <div>
-              <label>Check-Out Date:</label>
-              <input
-                type="date"
-                name="checkOutDate"
-                value={formData.checkOutDate}
-                onChange={handleInputChange}
-              />
+              <div className="form-group">
+                <label>Check-In Date:</label>
+                <input
+                  type="date"
+                  name="checkInDate"
+                  value={formData.checkInDate}
+                  onChange={handleInputChange}
+                />
+              </div>
             </div>
             <div>
-              <label>Adults:</label>
-              <input
-                type="number"
-                name="adults"
-                value={formData.adults}
-                onChange={handleInputChange}
-              />
+              <div className="form-group">
+                <label>Check-Out Date:</label>
+                <input
+                  type="date"
+                  name="checkOutDate"
+                  value={formData.checkOutDate}
+                  onChange={handleInputChange}
+                />
+              </div>
             </div>
             <div>
-              <label>Children:</label>
-              <input
-                type="number"
-                name="children"
-                value={formData.children}
-                onChange={handleInputChange}
-              />
+              <div className="form-group">
+                <label>Adults:</label>
+                <input
+                  type="number"
+                  name="adults"
+                  value={formData.adults}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
+            <div>
+              <div className="form-group">
+                <label>Children:</label>
+                <input
+                  type="number"
+                  name="children"
+                  value={formData.children}
+                  onChange={handleInputChange}
+                />
+              </div>
             </div>
             <button onClick={handleSaveBooking}>
               {formData.id ? "Update Booking" : "Add Booking"}

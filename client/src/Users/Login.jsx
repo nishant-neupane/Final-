@@ -45,7 +45,7 @@ function Login() {
   };
 
   const handleAdminLogin = () => {
-    navigate("/admin");
+    navigate("/adminHome");
   };
 
   return (

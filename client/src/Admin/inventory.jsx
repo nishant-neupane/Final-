@@ -90,16 +90,13 @@ function Inventory() {
 
   const handleDelete = async (id) => {
     try {
- 
-        await axios.delete(`http://localhost:3001/assets/${id}`);
-        const updatedItems = inventoryItems.filter((item) => item._id !== id);
-        setInventoryItems(updatedItems);
-      
+      await axios.delete(`http://localhost:3001/assets/${id}`);
+      const updatedItems = inventoryItems.filter((item) => item._id !== id);
+      setInventoryItems(updatedItems);
     } catch (error) {
       console.error("Error during asset deletion:", error);
     }
   };
-  
 
   useEffect(() => {
     const fetchInventoryItems = async () => {
@@ -127,8 +124,9 @@ function Inventory() {
       <div className="main-content">
         <main className="adminhome-main-container">
           <div>
-            <h1 className="adminhome-main-title"> Asset Admin Panel</h1>
-            
+            <div className="adminhome-main-title">
+              <h1>Asset Admin Panel</h1>
+            </div>
 
             <div>
               <label>Name:</label>
@@ -173,33 +171,33 @@ function Inventory() {
             )}
             <h2>Asset List</h2>
             <div className="table-container">
-            <table>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Category</th>
-                  <th>Quantity</th>
-                  <th>Description</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {inventoryItems.map((asset, index) => (
-                  <tr key={index}>
-                    <td>{asset.name}</td>
-                    <td>{asset.category}</td>
-                    <td>{asset.quantity}</td>
-                    <td>{asset.description}</td>
-                    <td>
-                      <button onClick={() => handleEdit(asset)}>Edit</button>
-                      <button onClick={() => handleDelete(asset._id)}>
-                        Delete
-                      </button>
-                    </td>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                    <th>Description</th>
+                    <th>Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {inventoryItems.map((asset, index) => (
+                    <tr key={index}>
+                      <td>{asset.name}</td>
+                      <td>{asset.category}</td>
+                      <td>{asset.quantity}</td>
+                      <td>{asset.description}</td>
+                      <td>
+                        <button onClick={() => handleEdit(asset)}>Edit</button>
+                        <button onClick={() => handleDelete(asset._id)}>
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         </main>

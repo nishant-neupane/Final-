@@ -33,6 +33,7 @@ function Admin() {
         localStorage.setItem("adminuser", JSON.stringify(admin));
         navigate("/adminhome");
         toast.success("Admin Login successful!");
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);
@@ -104,7 +105,7 @@ function Admin() {
                   className="form-control rounded-0"
                   style={{ width: "100%" }}
                   onChange={(e) => setPassword(e.target.value)}
-                  value={password} // Bind the password field value to state
+                  value={password} 
                 />
                 <div
                   className="input-group-append"

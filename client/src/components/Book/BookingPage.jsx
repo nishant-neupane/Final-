@@ -87,9 +87,11 @@ function BookingPage() {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
+      
       [name]: value,
     }));
   };
+  
 
   const handleSubmit = async () => {
     try {
@@ -111,10 +113,12 @@ function BookingPage() {
           customerEmail: formData.email,
           roomType: roomDetails.type,
           roomNumber: roomId,
+          phoneNumber: formData.phone,
           checkInDate: formData.checkInDate,
           checkOutDate: formData.checkOutDate,
           adults: formData.adults,
           children: formData.children,
+          totalAmount: totalAmount,
         }
       );
 
@@ -131,7 +135,7 @@ function BookingPage() {
       });
 
       navigate("/");
-      toast.success("Booking successful! Detail is sent to email");
+      // toast.success("Booking successful! Detail is sent to email");
     } catch (error) {
       if (error.response && error.response.data) {
         console.error("Error occurred while booking:", error.response.data);

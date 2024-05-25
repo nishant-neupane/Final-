@@ -24,7 +24,6 @@ function Contact() {
 
     try {
       await axios.post("http://localhost:3001/send-feedback", formData);
-      // console.log("Feedback submitted successfully:", formData);
       setFormData({
         name: "",
         email: "",

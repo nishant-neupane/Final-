@@ -86,7 +86,6 @@ button {
 .container {
   max-width: 85%;
   margin: auto;
-  /* margin-left: 20px; */
 }
 /*-------Read More--------*/
 /* ReadMore */
@@ -470,7 +469,7 @@ h1 {
 .rooms h3 {
   font-size: 30px;
   line-height: 20px;
-  margin-left: 20px;
+  margin-left: 15px;
   font-weight: 500;
   color: #7fc142;
 }
@@ -1065,14 +1064,13 @@ footer label {
   background-color: #6baa38;
 }
 
-/* Global Styles */
+/* Responsive */
 @media only screen and (max-width: 1022px) {
   .container {
     max-width: 90%;
   }
 }
 
-/* Header Styles */
 @media only screen and (max-width: 360px) {
   header {
     height: 15vh;
@@ -1092,7 +1090,6 @@ footer label {
   }
 }
 
-/* Home Styles */
 @media only screen and (max-width: 1022px) {
   .home .text {
     top: 25%;
@@ -1112,7 +1109,6 @@ footer label {
   }
 }
 
-/* Book Styles */
 @media only screen and (max-width: 1022px) {
   .book {
     padding: 20px 0;
@@ -1132,7 +1128,6 @@ footer label {
   }
 }
 
-/* About Styles */
 @media only screen and (max-width: 1022px) {
   .left,
   .right {
@@ -1149,7 +1144,6 @@ footer label {
   }
 }
 
-/* Counter Styles */
 @media only screen and (max-width: 1022px) {
   .counter {
     height: 40vh;
@@ -1164,7 +1158,6 @@ footer label {
   }
 }
 
-/* Rooms Styles */
 @media only screen and (max-width: 1022px) {
   .rooms .text {
     padding: 20px;
@@ -1180,7 +1173,6 @@ footer label {
   }
 }
 
-/* Gallery Styles */
 @media only screen and (max-width: 1022px) {
   .gallery .img::after {
     width: 150px;
@@ -1197,7 +1189,6 @@ footer label {
   }
 }
 
-/* Services Styles */
 @media only screen and (max-width: 1022px) {
   .services .box {
     padding: 15px;
@@ -1212,7 +1203,6 @@ footer label {
   }
 }
 
-/* Customer Styles */
 @media only screen and (max-width: 1022px) {
   .Customer {
     height: 50vh;
@@ -1233,7 +1223,6 @@ footer label {
   }
 }
 
-/* News Styles */
 @media only screen and (max-width: 1022px) {
   .news .left {
     padding: 20px 0;
@@ -1250,7 +1239,6 @@ footer label {
   }
 }
 
-/* Newsletter Styles */
 @media only screen and (max-width: 1022px) {
   .newsletter .container {
     top: -50px;
@@ -1266,7 +1254,6 @@ footer label {
   }
 }
 
-/* Footer Styles */
 @media only screen and (max-width: 1022px) {
   footer {
     padding: 5% 0;
